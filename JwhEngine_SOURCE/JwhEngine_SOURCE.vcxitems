@@ -14,9 +14,12 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)JwhApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JwhGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)JwhApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JwhGameObject.cpp" />
   </ItemGroup>
 </Project>
