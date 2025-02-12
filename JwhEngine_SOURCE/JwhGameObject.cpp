@@ -4,7 +4,7 @@
 namespace jw
 {
 	GameObject::GameObject()
-		: mX(0.0f), mY(0.0f)
+		: mX(0.0f), mY(0.0f), mX2(0.0f), mY2(0.0f), aX(0.0f)
 	{
 	}
 
@@ -34,20 +34,20 @@ namespace jw
 			mY += 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_LEFT)) // 'A'
+		if (Input::GetKey(eKeyCode::Left)) 
 		{
 			mX2 -= 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_RIGHT)) // 'D'
+		if (Input::GetKey(eKeyCode::Right)) 
 		{
 			mX2 += 0.01f;
 		}
-		if (GetAsyncKeyState(VK_UP)) // 'W'
+		if (Input::GetKey(eKeyCode::Up)) 
 		{
 			mY2 -= 0.01f;
 		}
-		if (GetAsyncKeyState(VK_DOWN)) // 'S'
+		if (Input::GetKey(eKeyCode::Down)) 
 		{
 			mY2 += 0.01f;
 		}
