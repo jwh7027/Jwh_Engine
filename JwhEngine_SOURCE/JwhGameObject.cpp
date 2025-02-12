@@ -1,4 +1,5 @@
 #include "JwhGameObject.h"
+#include "JwhInput.h"
 
 namespace jw
 {
@@ -13,26 +14,65 @@ namespace jw
 
 	void GameObject::Update()
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		if (Input::GetKey(eKeyCode::A))
 		{
 			mX -= 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		if (Input::GetKey(eKeyCode::D))
 		{
 			mX += 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		if (Input::GetKey(eKeyCode::W))
 		{
 			mY -= 0.01f;
 		}
 
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		if (Input::GetKey(eKeyCode::S))
 		{
 			mY += 0.01f;
 		}
 
+		if (GetAsyncKeyState(VK_LEFT)) // 'A'
+		{
+			mX2 -= 0.01f;
+		}
+
+		if (GetAsyncKeyState(VK_RIGHT)) // 'D'
+		{
+			mX2 += 0.01f;
+		}
+		if (GetAsyncKeyState(VK_UP)) // 'W'
+		{
+			mY2 -= 0.01f;
+		}
+		if (GetAsyncKeyState(VK_DOWN)) // 'S'
+		{
+			mY2 += 0.01f;
+		}
+
+		switch (vec)
+		{
+			case 0:
+			{
+				aX -= 0.05f;
+				if (200 + aX <= 200)
+				{
+					vec = 1;
+				}
+			}
+			break;
+			case 1:
+			{
+				aX += 0.05f;
+				if (200 + aX >= 400)
+				{
+					vec = 0;
+				}
+				break;
+			}
+		}
 	}
 	void GameObject::LateUpdate()
 	{
@@ -49,6 +89,20 @@ namespace jw
 
 		HPEN redpen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
 		HBRUSH oldPen = (HBRUSH)SelectObject(hdc, redpen);
+
+		Ellipse(hdc, 200 + mX2, 200 + mY2, 300 + mX2, 300 + mY2);
+
+		(HBRUSH)SelectObject(hdc, oldPen);
+
+		HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
+		HBRUSH oldBru = (HBRUSH)SelectObject(hdc, grayBrush);
+
+		Rectangle(hdc, 400 + aX, 400, 500 + aX, 500);
+
+		(HBRUSH)SelectObject(hdc, oldBru);
+
+		SelectObject(hdc, oldBru);
+		DeleteObject(grayBrush);
 
 		SelectObject(hdc, oldPen);
 		DeleteObject(blueBrush);

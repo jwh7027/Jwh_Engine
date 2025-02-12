@@ -1,5 +1,5 @@
 #include "JwhApplication.h"
-
+#include "JwhInput.h"
 namespace jw
 {
 	Application::Application()
@@ -17,6 +17,8 @@ namespace jw
 		mHdc = GetDC(hwnd);
 
 		mPlayer.SetPosition(0, 0);
+
+		Input::Initailize();
 	}
 
 	void Application::Run()
@@ -28,6 +30,7 @@ namespace jw
 
 	void Application::Update()
 	{
+		Input::Update();
 
 		mPlayer.Update();
 	}
